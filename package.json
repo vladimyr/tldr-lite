@@ -14,7 +14,9 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "build": "rollup -c rollup.config.js"
+    "build": "rollup -c rollup.config.js",
+    "prepublishOnly": "npm run build",
+    "release": "np"
   },
   "keywords": [
     "tldr",
