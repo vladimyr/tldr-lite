@@ -6,7 +6,8 @@ export default {
   input: 'cli.js',
   output: {
     file: 'cli.compact.js',
-    format: 'cjs'
+    format: 'cjs',
+    banner: '#!/usr/bin/env node'
   },
   moduleContext: {
     [require.resolve('kleur')]: 'module.exports'
