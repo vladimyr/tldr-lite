@@ -1,0 +1,56 @@
+{
+  "name": "tldr-lite",
+  "version": "0.0.0",
+  "description": "lite command line tldr client; simplified and community-driven manpages",
+  "main": "index.js",
+  "bin": "cli.js",
+  "config": {
+    "tldrRepo": "tldr-pages/tldr",
+    "tldrRepoUrl": "https://github.com/tldr-pages/tldr",
+    "tldrPageDirs": [
+      "/pages",
+      "/pages.ta"
+    ]
+  },
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "keywords": [
+    "tldr",
+    "tldr-pages",
+    "cli"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vladimyr/tldr-lite.git"
+  },
+  "author": {
+    "email": "d.vladimyr@gmail.com",
+    "name": "Dario Vladovic",
+    "url": "https://github.com/vladimyr"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vladimyr/tldr-lite/issues"
+  },
+  "homepage": "https://github.com/vladimyr/tldr-lite",
+  "dependencies": {
+    "debug": "^4.1.0",
+    "gh-got": "^8.0.1",
+    "kleur": "^3.0.1",
+    "marked": "^0.5.2",
+    "minimist": "^1.2.0",
+    "opn": "^5.4.0",
+    "unescape": "^1.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.10.0",
+    "eslint-config-semistandard": "^13.0.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "global-tunnel-ng": "^2.7.1"
+  }
+}
