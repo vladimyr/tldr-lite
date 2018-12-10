@@ -1,4 +1,4 @@
-# tldr-lite [![npm package version](https://badgen.net/npm/v/tldr-lite)](https://npm.im/tldr-lite) [![github license](https://badgen.net/github/license/vladimyr/tldr-lite)](https://github.com/vladimyr/tldr-lite/blob/master/LICENSE) [![js semistandard style](https://badgen.net/badge/code%20style/semistandard/pink)](https://github.com/Flet/semistandard)
+# tldr-lite [![install size](https://badgen.net/packagephobia/install/tldr-lite)](https://packagephobia.now.sh/result?p=tldr-lite) [![npm package version](https://badgen.net/npm/v/tldr-lite)](https://npm.im/tldr-lite) [![github license](https://badgen.net/github/license/vladimyr/tldr-lite)](https://github.com/vladimyr/tldr-lite/blob/master/LICENSE) [![js semistandard style](https://badgen.net/badge/code%20style/semistandard/pink)](https://github.com/Flet/semistandard)
 
 >lite command line `tldr` client; simplified and community-driven manpages
 
