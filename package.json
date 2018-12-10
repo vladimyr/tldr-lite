@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "lite command line tldr client; simplified and community-driven manpages",
   "main": "index.js",
-  "bin": "cli.js",
+  "bin": "cli.compact.js",
   "config": {
     "tldrRepo": "tldr-pages/tldr",
     "tldrRepoUrl": "https://github.com/tldr-pages/tldr",
@@ -13,7 +13,8 @@
     ]
   },
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build": "rollup -c rollup.config.js"
   },
   "keywords": [
     "tldr",
@@ -33,17 +34,12 @@
   "bugs": {
     "url": "https://github.com/vladimyr/tldr-lite/issues"
   },
+  "files": [
+    "cli.compact.js"
+  ],
   "homepage": "https://github.com/vladimyr/tldr-lite",
-  "dependencies": {
-    "debug": "^4.1.0",
-    "gh-got": "^8.0.1",
-    "kleur": "^3.0.1",
-    "marked": "^0.5.2",
-    "minimist": "^1.2.0",
-    "opn": "^5.4.0",
-    "unescape": "^1.0.1"
-  },
   "devDependencies": {
+    "debug": "^4.1.0",
     "eslint": "^5.10.0",
     "eslint-config-semistandard": "^13.0.0",
     "eslint-config-standard": "^12.0.0",
@@ -51,6 +47,16 @@
     "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
-    "global-tunnel-ng": "^2.7.1"
+    "gh-got": "^8.0.1",
+    "global-tunnel-ng": "^2.7.1",
+    "kleur": "^3.0.1",
+    "marked": "^0.5.2",
+    "minimist": "^1.2.0",
+    "opn": "^5.4.0",
+    "rollup": "^0.67.4",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-json": "^3.1.0",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "unescape": "^1.0.1"
   }
 }
