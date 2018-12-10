@@ -1,7 +1,7 @@
 'use strict';
 
-const { bold, green, red, yellow } = require('kleur');
 const { remotePaths, search } = require('./lib/search');
+const kleur = require('kleur');
 const opn = require('opn');
 const Parser = require('./lib/parser');
 const pkg = require('./package.json');
@@ -18,7 +18,7 @@ const supportsEmoji = process.platform !== 'win32' ||
                       process.env.TERM === 'xterm-256color';
 
 const emoji = char => supportsEmoji ? `${char}  ` : '';
-const formatError = msg => msg.replace(/^\w*Error:\s+/, match => red().bold(match));
+const formatError = msg => msg.replace(/^\w*Error:\s+/, match => kleur.red().bold(match));
 const openUrl = url => opn(url, { wait: false });
 
 const argv = require('minimist')(process.argv.slice(2), {
@@ -30,7 +30,7 @@ const argv = require('minimist')(process.argv.slice(2), {
 });
 
 const help = `
-  ${bold(pkg.name)} v${pkg.version}
+  ${kleur.bold(pkg.name)} v${pkg.version}
 
   Usage:
     $ ${pkg.name} [command]        # view tldr page for given command
@@ -44,8 +44,8 @@ const help = `
     -h, --help     Show help
     -v, --version  Show version number
 
-  Homepage:     ${green(pkg.homepage)}
-  Report issue: ${green(pkg.bugs.url)}
+  Homepage:     ${kleur.green(pkg.homepage)}
+  Report issue: ${kleur.green(pkg.bugs.url)}
 `;
 
 program(argv._, argv).catch(err => console.error(formatError(err.stack)));
@@ -53,6 +53,9 @@ program(argv._, argv).catch(err => console.error(formatError(err.stack)));
 async function program([command, ...tokens], flags) {
   if (flags.version) return console.log(pkg.version);
   if (flags.help) return console.log(help);
+  if (!command) {
+    return console.error(formatError('Error: Page name or command required!'));
+  }
   if (command === 'home') return openUrl(pkg.config.tldrRepoUrl);
   if (command === 'browse') {
     return openUrl(pkg.config.tldrRepoUrl + '/tree/master/pages');
@@ -83,7 +86,7 @@ async function searchPages(query) {
     console.error(formatError('Error: No search query provided!'));
     return console.log(help);
   }
-  console.log('%sSearching for: %s', emoji('🔍'), yellow(query));
+  console.log('%sSearching for: %s', emoji('🔍'), kleur.yellow(query));
   const pages = await search(query);
   if (!pages.length) {
     return console.log('%sNo pages found. Try different search.', emoji('⛔️'));
@@ -91,7 +94,7 @@ async function searchPages(query) {
   console.log();
   pages.map(page => console.log('  $ %s', pageInfo(page)));
   return console.log('\n%sRun %s to see specific page.',
-    emoji('💡'), yellow(`npx ${pkg.name} <command>`));
+    emoji('💡'), kleur.yellow(`npx ${pkg.name} <command>`));
 }
 
 async function displayPage(contents) {
@@ -101,8 +104,8 @@ async function displayPage(contents) {
 }
 
 function pageInfo(page) {
-  if (page.os[0] === 'common') return bold(page.name);
-  return `${bold(page.name)}  (Available on: ${page.os.sort().join(', ')})`;
+  if (page.os[0] === 'common') return kleur.bold(page.name);
+  return `${kleur.bold(page.name)}  (Available on: ${page.os.sort().join(', ')})`;
 }
 
 function normalize(query) {
