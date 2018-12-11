@@ -7,10 +7,7 @@
   "config": {
     "tldrRepo": "tldr-pages/tldr",
     "tldrRepoUrl": "https://github.com/tldr-pages/tldr",
-    "tldrPageDirs": [
-      "/pages",
-      "/pages.ta"
-    ]
+    "tldrPageDir": "/pages"
   },
   "scripts": {
     "lint": "eslint .",
