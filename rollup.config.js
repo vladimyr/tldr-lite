@@ -3,6 +3,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import json from 'rollup-plugin-json';
 import strip from 'rollup-plugin-strip';
 import hypothetical from 'rollup-plugin-hypothetical';
+import copy from 'rollup-plugin-cpy';
 
 const sourceMap = false;
 
@@ -18,7 +19,12 @@ export default {
     ...stripDebug(),
     resolve(),
     commonjs({ sourceMap }),
-    json()
+    json(),
+    copy({
+      files: require.resolve('opn/xdg-open'),
+      dest: __dirname,
+      options: { verbose: true }
+    })
   ]
 };
 
