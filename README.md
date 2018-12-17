@@ -11,17 +11,17 @@ $ npx tldr-lite [command]
 ```
 $ npx tldr-lite --help
 
-tldr-lite v0.0.0
+tldr-lite v0.1.3
 
 Usage:
-  $ tldr-lite [command]        # view tldr page for given command
-  $ tldr-lite --raw [command]  # view raw version of tldr page (markdown)
-  $ tldr-lite --web [command]  # open tldr page in browser
-  $ tldr-lite search [query]   # query tldr pages github repo
+  $ tldr-lite <command>        # view tldr page for given command
+  $ tldr-lite search <query>   # query tldr pages github repo
   $ tldr-lite home             # open tldr-pages github repo
   $ tldr-lite browse           # browse pages online
 
 Options:
+  -r, --raw      Display raw version of tldr page (markdown)
+  -w, --web      Open tldr page in web browser
   -h, --help     Show help
   -v, --version  Show version number
 
