@@ -22,25 +22,27 @@ const formatError = msg => msg.replace(/^\w*Error:\s+/, match => kleur.red().bol
 const openUrl = url => opn(url, { wait: false });
 
 const argv = require('minimist')(process.argv.slice(2), {
-  boolean: true,
   alias: {
     v: 'version',
-    h: 'help'
-  }
+    h: 'help',
+    r: 'raw',
+    w: 'web'
+  },
+  boolean: ['version', 'help', 'raw', 'web']
 });
 
 const help = `
   ${kleur.bold(pkg.name)} v${pkg.version}
 
   Usage:
-    $ ${pkg.name} [command]        # view tldr page for given command
-    $ ${pkg.name} --raw [command]  # view raw version of tldr page (markdown)
-    $ ${pkg.name} --web [command]  # open tldr page in browser
-    $ ${pkg.name} search [query]   # query tldr pages github repo
+    $ ${pkg.name} <command>        # view tldr page for given command
+    $ ${pkg.name} search <query>   # query tldr pages github repo
     $ ${pkg.name} home             # open tldr-pages github repo
     $ ${pkg.name} browse           # browse pages online
 
   Options:
+    -r, --raw      Display raw version of tldr page (markdown)
+    -w, --web      Open tldr page in web browser
     -h, --help     Show help
     -v, --version  Show version number
 
