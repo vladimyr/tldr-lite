@@ -61,5 +61,8 @@
     "rollup-plugin-node-resolve": "^4.0.0",
     "rollup-plugin-strip": "^1.2.0",
     "unescape": "^1.0.1"
+  },
+  "dependencies": {
+    "minimist-options": "^3.0.2"
   }
 }
