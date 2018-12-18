@@ -21,15 +21,13 @@ const emoji = char => supportsEmoji ? `${char}  ` : '';
 const formatError = msg => msg.replace(/^\w*Error:\s+/, match => kleur.red().bold(match));
 const openUrl = url => opn(url, { wait: false });
 
-const argv = require('minimist')(process.argv.slice(2), {
-  alias: {
-    v: 'version',
-    h: 'help',
-    r: 'raw',
-    w: 'web'
-  },
-  boolean: ['version', 'help', 'raw', 'web']
+const options = require('minimist-options')({
+  help: { type: 'boolean', alias: 'h' },
+  version: { type: 'boolean', alias: 'v' },
+  raw: { type: 'boolean', alias: 'r' },
+  web: { type: 'boolean', alias: 'w' }
 });
+const argv = require('minimist')(process.argv.slice(2), options);
 
 const help = `
   ${kleur.bold(pkg.name)} v${pkg.version}
