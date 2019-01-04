@@ -1,7 +1,9 @@
 'use strict';
 
-const { remotePaths, search } = require('./lib/search');
 const kleur = require('kleur');
+kleur.enabled = Boolean(process.stdout.isTTY);
+
+const { remotePaths, search } = require('./lib/search');
 const opn = require('opn');
 const Parser = require('./lib/parser');
 const pkg = require('./package.json');

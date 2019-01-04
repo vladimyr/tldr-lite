@@ -4,6 +4,7 @@ import json from 'rollup-plugin-json';
 import strip from 'rollup-plugin-strip';
 import hypothetical from 'rollup-plugin-hypothetical';
 import copy from 'rollup-plugin-cpy';
+import visualizer from 'rollup-plugin-visualizer';
 
 const sourceMap = false;
 
@@ -12,7 +13,8 @@ export default {
   output: {
     file: 'cli.compact.js',
     format: 'cjs',
-    banner: '#!/usr/bin/env node'
+    banner: '#!/usr/bin/env node',
+    sourcemap: sourceMap
   },
   external: require('module').builtinModules,
   plugins: [
@@ -24,7 +26,8 @@ export default {
       files: require.resolve('opn/xdg-open'),
       dest: __dirname,
       options: { verbose: true }
-    })
+    }),
+    visualizer()
   ]
 };
 

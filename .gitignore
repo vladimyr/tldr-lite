@@ -14,5 +14,6 @@ npm-debug.log*
 .DS_Store
 
 # build artifacts
-cli.compact.js
+cli.compact.js*
 xdg-open
+stats.html
