@@ -1,9 +1,9 @@
-import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
-import json from 'rollup-plugin-json';
-import strip from 'rollup-plugin-strip';
-import hypothetical from 'rollup-plugin-hypothetical';
 import copy from 'rollup-plugin-cpy';
+import json from 'rollup-plugin-json';
+import replace from 'rollup-plugin-re';
+import resolve from 'rollup-plugin-node-resolve';
+import strip from 'rollup-plugin-strip';
 import visualizer from 'rollup-plugin-visualizer';
 
 const sourceMap = false;
@@ -18,7 +18,13 @@ export default {
   },
   external: require('module').builtinModules,
   plugins: [
-    ...stripDebug(),
+    replace({
+      patterns: [{
+        test: /require\('debug'\)/g,
+        replace: '(() => () => {})'
+      }]
+    }),
+    strip({ functions: ['debug'], sourceMap }),
     resolve(),
     commonjs({ sourceMap }),
     json(),
@@ -30,17 +36,3 @@ export default {
     visualizer()
   ]
 };
-
-function stripDebug() {
-  const fake = `
-    const noop = () => {};
-    export default () => noop;
-  `;
-  return [
-    hypothetical({
-      allowFallthrough: true,
-      files: { [require.resolve('debug')]: fake }
-    }),
-    strip({ functions: ['debug'], sourceMap })
-  ];
-}
