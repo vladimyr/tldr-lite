@@ -38,7 +38,10 @@
     "xdg-open"
   ],
   "homepage": "https://github.com/vladimyr/tldr-lite",
-  "dependencies": {},
+  "dependencies": {
+    "get-stdin": "^6.0.0",
+    "terminal-link": "^1.2.0"
+  },
   "devDependencies": {
     "debug": "^4.1.1",
     "eslint": "^5.11.1",

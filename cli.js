@@ -4,6 +4,8 @@ const kleur = require('kleur');
 kleur.enabled = Boolean(process.stdout.isTTY);
 
 const { remotePaths, search } = require('./lib/search');
+const { readFile } = require('fs');
+const getStdin = require('get-stdin');
 const opn = require('opn');
 const Parser = require('./lib/parser');
 const pkg = require('./package.json');
@@ -27,7 +29,8 @@ const options = require('minimist-options')({
   help: { type: 'boolean', alias: 'h' },
   version: { type: 'boolean', alias: 'v' },
   raw: { type: 'boolean', alias: 'r' },
-  web: { type: 'boolean', alias: 'w' }
+  web: { type: 'boolean', alias: 'w' },
+  render: { type: 'string', alias: 'f' }
 });
 const argv = require('minimist')(process.argv.slice(2), options);
 
@@ -39,12 +42,14 @@ const help = `
     $ ${pkg.name} search <query>   # query tldr pages github repo
     $ ${pkg.name} home             # open tldr-pages github repo
     $ ${pkg.name} browse           # browse pages online
+    $ ${pkg.name} < 7z.md          # render local page
 
   Options:
-    -r, --raw      Display raw version of tldr page (markdown)
-    -w, --web      Open tldr page in web browser
-    -h, --help     Show help
-    -v, --version  Show version number
+    -r, --raw             Display raw version of tldr page (markdown)
+    -w, --web             Open tldr page in web browser
+    -f, --render <file>   Render tldr page from local file
+    -h, --help            Show help
+    -v, --version         Show version number
 
   Homepage:     ${kleur.green(pkg.homepage)}
   Report issue: ${kleur.green(pkg.bugs.url)}
@@ -55,6 +60,12 @@ program(argv._, argv).catch(err => console.error(formatError(err.stack)));
 async function program([command, ...tokens], flags) {
   if (flags.version) return console.log(pkg.version);
   if (flags.help) return console.log(help);
+  const contents = await getStdin();
+  if (contents) return displayPage(contents);
+  if (flags.render) {
+    const contents = await readFile(flags.render, 'utf-8');
+    return displayPage(contents);
+  }
   if (!command) {
     return console.error(formatError('Error: Page name or command required!'));
   }
