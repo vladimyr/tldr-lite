@@ -61,10 +61,10 @@ async function program([command, ...tokens], flags) {
   if (flags.version) return console.log(pkg.version);
   if (flags.help) return console.log(help);
   const contents = await getStdin();
-  if (contents) return displayPage(contents);
+  if (contents) return displayPage(contents, flags.raw);
   if (flags.render) {
     const contents = await readFile(flags.render, 'utf-8');
-    return displayPage(contents);
+    return displayPage(contents, flags.raw);
   }
   if (!command) {
     return console.error(formatError('Error: Page name or command required!'));
@@ -91,7 +91,7 @@ async function viewPage(command, { raw, useBrowser } = {}) {
   const pageUrl = pkg.config.tldrRepoUrl + '/raw/master/' + pagePath;
   const resp = await fetch(pageUrl);
   if (raw) return console.log(resp.body);
-  displayPage(resp.body);
+  displayPage(resp.body, raw);
 }
 
 async function searchPages(query) {
@@ -110,7 +110,8 @@ async function searchPages(query) {
     emoji('💡'), kleur.yellow(`npx ${pkg.name} <command>`));
 }
 
-async function displayPage(contents) {
+async function displayPage(contents, raw = false) {
+  if (raw) return console.log(contents);
   const page = Parser.parse(contents);
   const theme = await Theme.getSelected();
   console.log(page.toString(theme));
