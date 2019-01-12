@@ -38,10 +38,6 @@
     "xdg-open"
   ],
   "homepage": "https://github.com/vladimyr/tldr-lite",
-  "dependencies": {
-    "get-stdin": "^6.0.0",
-    "terminal-link": "^1.2.0"
-  },
   "devDependencies": {
     "debug": "^4.1.1",
     "eslint": "^5.11.1",
@@ -51,6 +47,7 @@
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
+    "get-stdin": "^6.0.0",
     "gh-got": "^8.1.0",
     "global-tunnel-ng": "^2.7.1",
     "kleur": "^3.0.1",
@@ -66,6 +63,7 @@
     "rollup-plugin-re": "^1.0.7",
     "rollup-plugin-strip": "^1.2.1",
     "rollup-plugin-visualizer": "^0.9.2",
+    "terminal-link": "^1.2.0",
     "unescape": "^1.0.1"
   }
 }
