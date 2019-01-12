@@ -11,19 +11,21 @@ $ npx tldr-lite [command]
 ```
 $ npx tldr-lite --help
 
-tldr-lite v0.1.3
+tldr-lite v0.2.0
 
 Usage:
   $ tldr-lite <command>        # view tldr page for given command
   $ tldr-lite search <query>   # query tldr pages github repo
   $ tldr-lite home             # open tldr-pages github repo
   $ tldr-lite browse           # browse pages online
+  $ tldr-lite < 7z.md          # render local page
 
 Options:
-  -r, --raw      Display raw version of tldr page (markdown)
-  -w, --web      Open tldr page in web browser
-  -h, --help     Show help
-  -v, --version  Show version number
+  -r, --raw             Display raw version of tldr page (markdown)
+  -w, --web             Open tldr page in web browser
+  -f, --render <file>   Render tldr page from local file
+  -h, --help            Show help
+  -v, --version         Show version number
 
 Homepage:     https://github.com/vladimyr/tldr-lite
 Report issue: https://github.com/vladimyr/tldr-lite/issues
