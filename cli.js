@@ -6,7 +6,7 @@ kleur.enabled = Boolean(process.stdout.isTTY);
 const { remotePaths, search } = require('./lib/search');
 const { readFile } = require('fs');
 const getStdin = require('get-stdin');
-const opn = require('opn');
+const open = require('open');
 const Parser = require('./lib/parser');
 const pkg = require('./package.json');
 const r = require('gh-got');
@@ -23,7 +23,7 @@ const supportsEmoji = process.platform !== 'win32' ||
 
 const emoji = char => supportsEmoji ? `${char}  ` : '';
 const formatError = msg => msg.replace(/^\w*Error:\s+/, match => kleur.red().bold(match));
-const openUrl = url => opn(url, { wait: false });
+const openUrl = url => open(url, { wait: false });
 
 const options = require('minimist-options')({
   help: { type: 'boolean', alias: 'h' },
