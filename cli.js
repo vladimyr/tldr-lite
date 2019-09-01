@@ -57,7 +57,8 @@ const help = `
 
 program(argv._, argv).catch(err => console.error(formatError(err.stack)));
 
-async function program([command, ...tokens], flags) {
+async function program(args, flags) {
+  const [command, ...tokens] = args;
   if (flags.version) return console.log(pkg.version);
   if (flags.help) return console.log(help);
   const contents = await getStdin();
@@ -74,10 +75,11 @@ async function program([command, ...tokens], flags) {
     return openUrl(pkg.config.tldrRepoUrl + '/tree/master/pages');
   }
   if (command === 'search') return searchPages(normalize(tokens));
-  viewPage(command, { raw: flags.raw, useBrowser: flags.web });
+  viewPage(args, { raw: flags.raw, useBrowser: flags.web });
 }
 
-async function viewPage(command, { raw, useBrowser } = {}) {
+async function viewPage(args, { raw, useBrowser } = {}) {
+  const command = args.join(' ').replace(/\s+/g, '-');
   const paths = await remotePaths(command);
   const pagePath = paths[platform] || paths[0];
   if (!pagePath) {
