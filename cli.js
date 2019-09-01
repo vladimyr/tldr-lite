@@ -4,12 +4,14 @@ const kleur = require('kleur');
 kleur.enabled = Boolean(process.stdout.isTTY);
 
 const { remotePaths, search } = require('./lib/search');
-const { readFile } = require('fs');
 const getStdin = require('get-stdin');
 const open = require('open');
 const Parser = require('./lib/parser');
+const path = require('path');
 const pkg = require('./package.json');
 const r = require('gh-got');
+const { readFile } = require('fs');
+const { URL } = require('url');
 const Theme = require('./lib/theme');
 
 const platform = (name => {
@@ -23,7 +25,6 @@ const supportsEmoji = process.platform !== 'win32' ||
 
 const emoji = char => supportsEmoji ? `${char}  ` : '';
 const formatError = msg => msg.replace(/^\w*Error:\s+/, match => kleur.red().bold(match));
-const openUrl = url => open(url, { wait: false });
 
 const options = require('minimist-options')({
   help: { type: 'boolean', alias: 'h' },
@@ -72,7 +73,7 @@ async function program(args, flags) {
   }
   if (command === 'home') return openUrl(pkg.config.tldrRepoUrl);
   if (command === 'browse') {
-    return openUrl(pkg.config.tldrRepoUrl + '/tree/master/pages');
+    return openUrl(pkg.config.tldrRepoUrl, '/tree/master/pages');
   }
   if (command === 'search') return searchPages(normalize(tokens));
   viewPage(args, { raw: flags.raw, useBrowser: flags.web });
@@ -88,10 +89,9 @@ async function viewPage(args, { raw, useBrowser } = {}) {
       emoji('💡'), pkg.config.tldrRepoUrl);
   }
   if (useBrowser) {
-    return openUrl(pkg.config.tldrRepoUrl + '/blob/master/' + pagePath);
+    return openUrl(pkg.config.tldrRepoUrl, '/blob/master/', pagePath);
   }
-  const pageUrl = pkg.config.tldrRepoUrl + '/raw/master/' + pagePath;
-  const resp = await fetch(pageUrl);
+  const resp = await fetch(pkg.config.tldrRepoUrl, '/raw/master/', pagePath);
   if (raw) return console.log(resp.body);
   displayPage(resp.body, raw);
 }
@@ -119,6 +119,12 @@ async function displayPage(contents, raw = false) {
   console.log(page.toString(theme));
 }
 
+function openUrl(baseUrl, ...pathname) {
+  const url = new URL(baseUrl);
+  url.pathname = path.join(url.pathname, ...pathname);
+  return open(url.href, { wait: false });
+}
+
 function pageInfo(page) {
   if (page.os[0] === 'common') return kleur.bold(page.name);
   return `${kleur.bold(page.name)}  (Available on: ${page.os.sort().join(', ')})`;
@@ -130,6 +136,8 @@ function normalize(query) {
     .replace(/\s+and\s+/ig, op => op.toUpperCase());
 }
 
-function fetch(url) {
-  return r.get(url, { json: false, baseUrl: null, headers: null });
+function fetch(baseUrl, ...pathname) {
+  const url = new URL(baseUrl);
+  url.pathname = path.join(url.pathname, ...pathname);
+  return r.get(url.href, { json: false, baseUrl: null, headers: null });
 }
