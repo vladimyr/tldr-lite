@@ -10,6 +10,7 @@
     "tldrPageDir": "/pages"
   },
   "scripts": {
+    "debug": "DEBUG=* NODE_TLS_REJECT_UNAUTHORIZED=0 https_proxy=http://localhost:8008 node --inspect-brk -r ./proxy.js cli.js",
     "lint": "eslint .",
     "build": "rollup -c rollup.config.js",
     "prepublishOnly": "npm run build",
