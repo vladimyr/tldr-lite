@@ -53,7 +53,7 @@
     "gh-got": "^8.1.0",
     "global-tunnel-ng": "^2.7.1",
     "kleur": "^3.0.3",
-    "marked": "^0.7.0",
+    "marked": "^1.0.0",
     "minimist": "^1.2.0",
     "minimist-options": "^4.0.1",
     "open": "^7.0.0",
