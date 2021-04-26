@@ -65,7 +65,7 @@
     "rollup-plugin-re": "^1.0.7",
     "rollup-plugin-strip": "^1.2.2",
     "rollup-plugin-visualizer": "^1.1.1",
-    "terminal-link": "^2.0.0",
+    "terminal-link": "^3.0.0",
     "unescape": "^1.0.1"
   }
 }
