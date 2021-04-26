@@ -56,7 +56,7 @@
     "marked": "^0.7.0",
     "minimist": "^1.2.0",
     "minimist-options": "^4.0.1",
-    "open": "^7.0.0",
+    "open": "^8.0.0",
     "rollup": "^2.0.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-cpy": "^2.0.1",
